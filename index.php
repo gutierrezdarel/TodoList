@@ -22,18 +22,23 @@ require_once 'php/Init.php';
             <a class="navbar-brand" href="#">To Do List</a>
         </div>
     </nav>
+    <?php
+    // UpdateT();
+    ?>
     <div class="container mt-5">
-    <input type="hidden" name="update_id" id="update_id">
+
         <p><?php
             inserT();
+            UpdateT();
+            DeleteT();
             ?></p>
         <form action="" method="POST">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="To do Task" name="item">
-                <button class="btn btn-outline-secondary" type="submit" value="add task">Submit</button>
+                <input type="text" class="form-control" placeholder="To do Task" name="item" required>
+                <button class="btn btn-outline-secondary" type="submit" name="submit">Submit</button>
             </div>
         </form>
-            <h3 class="mt-5">PENDING TASK</h3>
+        <h3 class="mt-5">PENDING TASK</h3>
         <table class="table ">
             <thead>
                 <tr>
@@ -43,7 +48,7 @@ require_once 'php/Init.php';
                 </tr>
             </thead>
             <tbody>
-                <?php 
+                <?php
                 getP()
                 ?>
             </tbody>
@@ -53,16 +58,59 @@ require_once 'php/Init.php';
             <thead>
                 <tr>
                     <th scope="col">Task</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Date Completed</th>
                 </tr>
             </thead>
             <tbody>
-                <?php 
+                <?php
                 getC()
                 ?>
             </tbody>
         </table>
-        
+
+        <div class="modal fade" tabindex="-1" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add to completed</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST">
+                        <input type="hidden" name="update_id" id="update_id">
+                        <div class="modal-body">
+                            <p>Are you sure do you to add to completed this task?.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="submit" name="update" class="btn btn-primary">Yes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" tabindex="-1" id="delete-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete task</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="" method="POST">
+                        <input type="hidden" name="delete_id" id="delete_id">
+                        <div class="modal-body">
+                            <p>Are you sure do you to delete this task?.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            <button type="submit" name="delete" class="btn btn-primary">Yes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </body>
